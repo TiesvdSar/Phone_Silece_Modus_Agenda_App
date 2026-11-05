@@ -1,6 +1,6 @@
 # Privacyverklaring Stille Modus Agenda
 
-Laatst bijgewerkt: [datum van publicatie invullen]
+Laatst bijgewerkt: 5 november 2026
 
 Stille Modus Agenda zet je telefoon automatisch op stil tijdens afspraken in je agenda.
 
@@ -35,4 +35,4 @@ weg. Je agenda blijft onaangeraakt.
 
 ## Contact
 
-Vragen? Mail naar [contactadres invullen].
+Vragen? Stel ze via [GitHub Issues](https://github.com/TiesvdSar/Phone_Silece_Modus_Agenda_App/issues).
