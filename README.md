@@ -11,7 +11,9 @@ Alle versies staan bij [Releases](https://github.com/TiesvdSar/Phone_Silece_Modu
 
 - Zet je telefoon op stil zodra een afspraak begint en weer terug als die voorbij is.
 - Tijdens stil zijn oproepen en meldingen stil. Je wekker gaat wel gewoon af.
-- Geannuleerde en geweigerde afspraken en afspraken op "beschikbaar" tellen niet mee.
+- Geannuleerde en geweigerde afspraken en afspraken op "beschikbaar" tellen niet mee. Afspraken met
+  tijdstip die langer dan 24 uur duren ook niet.
+- Tijdens stil zie je een melding met een knop om het geluid direct weer aan te zetten.
 - Heb je zelf "Niet storen" aan, of zet je tijdens een afspraak het geluid aan, dan blijft dat zo.
 - Agendawijzigingen worden vanzelf opgepikt, ook als de app niet openstaat.
 
@@ -21,6 +23,7 @@ Per agenda stel je in:
 - Trefwoorden: alleen afspraken met bepaalde woorden, of juist nooit
 - Marge: hoeveel minuten voor de start en na afloop de telefoon stil is
 - Of hele-dagafspraken meetellen
+- Of onbeantwoorde uitnodigingen meetellen (standaard niet)
 
 ## Installeren
 

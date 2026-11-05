@@ -23,8 +23,9 @@ class SilencePlannerTest {
         color: Int = red,
         canceled: Boolean = false,
         declined: Boolean = false,
-        free: Boolean = false
-    ) = CalendarEvent(1, calendarId, title, start, end, allDay, color, canceled, declined, free)
+        free: Boolean = false,
+        invited: Boolean = false
+    ) = CalendarEvent(1, calendarId, title, start, end, allDay, color, canceled, declined, free, invited)
 
     @Test
     fun `default rule silences a timed event`() {
@@ -35,6 +36,32 @@ class SilencePlannerTest {
     fun `canceled and declined events never silence`() {
         assertFalse(SilencePlanner.shouldSilence(event(canceled = true), CalendarRule()))
         assertFalse(SilencePlanner.shouldSilence(event(declined = true), CalendarRule()))
+    }
+
+    @Test
+    fun `unanswered invitation only silences when the calendar allows it`() {
+        assertFalse(SilencePlanner.shouldSilence(event(invited = true), CalendarRule()))
+        assertTrue(SilencePlanner.shouldSilence(event(invited = true), CalendarRule(includeInvited = true)))
+    }
+
+    @Test
+    fun `timed event longer than a day does not silence`() {
+        val day = 24 * 60 * minute
+        assertTrue(SilencePlanner.shouldSilence(event(start = 0, end = day), CalendarRule()))
+        assertFalse(SilencePlanner.shouldSilence(event(start = 0, end = day + minute), CalendarRule()))
+    }
+
+    @Test
+    fun `multi-day all-day event still silences when included`() {
+        val allDay = event(start = 0, end = 3 * 24 * 60 * minute, allDay = true)
+        assertTrue(SilencePlanner.shouldSilence(allDay, CalendarRule(includeAllDay = true)))
+    }
+
+    @Test
+    fun `silent until follows overlapping windows`() {
+        val windows = listOf(SilenceWindow(10, 20), SilenceWindow(15, 30), SilenceWindow(30, 35), SilenceWindow(50, 60))
+        assertEquals(35L, SilencePlanner.silentUntil(windows, 12))
+        assertEquals(40L, SilencePlanner.silentUntil(windows, 40))
     }
 
     @Test

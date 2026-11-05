@@ -43,4 +43,14 @@
     <string name="margin_after_label">Minutes after the end to stay silent (0–120)</string>
     <string name="all_day_title">All day</string>
     <string name="all_day_label">Include all-day events</string>
+    <string name="invited_title">Invitations</string>
+    <string name="invited_label">Include unanswered invitations</string>
+    <string name="invited_hint">When off, nobody can silence your phone with an invitation you haven\'t accepted.</string>
+
+    <string name="step_notifications_title">Notifications</string>
+    <string name="step_notifications_description">Shows when your phone is silent, with a button to turn the sound back on right away.</string>
+    <string name="notification_channel">Silent mode</string>
+    <string name="notification_title">Phone is on silent</string>
+    <string name="notification_text">Silent until %1$s</string>
+    <string name="notification_sound_on">Sound on</string>
 </resources>

@@ -24,9 +24,14 @@ object PermissionCheck {
         context.getSystemService(PowerManager::class.java)
             .isIgnoringBatteryOptimizations(context.packageName)
 
+    fun canNotify(context: Context): Boolean =
+        Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU ||
+            context.checkSelfPermission(Manifest.permission.POST_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED
+
     /** Without these two the app cannot silence the phone at all. */
     fun hasRequired(context: Context): Boolean = hasCalendar(context) && hasDndAccess(context)
 
     fun hasAll(context: Context): Boolean =
-        hasRequired(context) && canScheduleExact(context) && ignoresBatteryOptimizations(context)
+        hasRequired(context) && canScheduleExact(context) &&
+            ignoresBatteryOptimizations(context) && canNotify(context)
 }
