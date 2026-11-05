@@ -1,37 +1,59 @@
-# Phone_Silece_Modus_Agenda_App
-This is a right now adriod only app that check the agenda and if something is planned then the phone goes automaticly to silence modus.
+# Stille Modus Agenda
 
-## Project structure
+Android-app die je telefoon automatisch op stil zet tijdens afspraken in je agenda, en het geluid
+daarna weer aanzet.
+
+**[⬇ Download de app (APK)](https://github.com/TiesvdSar/Phone_Silece_Modus_Agenda_App/releases/latest/download/StilleModusAgenda.apk)**
+
+Alle versies staan bij [Releases](https://github.com/TiesvdSar/Phone_Silece_Modus_Agenda_App/releases).
+
+## Wat de app doet
+
+- Zet je telefoon op stil zodra een afspraak begint en weer terug als die voorbij is.
+- Tijdens stil zijn oproepen en meldingen stil. Je wekker gaat wel gewoon af.
+- Geannuleerde en geweigerde afspraken en afspraken op "beschikbaar" tellen niet mee.
+- Heb je zelf "Niet storen" aan, of zet je tijdens een afspraak het geluid aan, dan blijft dat zo.
+- Agendawijzigingen worden vanzelf opgepikt, ook als de app niet openstaat.
+
+Per agenda stel je in:
+
+- Welke kleuren meetellen
+- Trefwoorden: alleen afspraken met bepaalde woorden, of juist nooit
+- Marge: hoeveel minuten voor de start en na afloop de telefoon stil is
+- Of hele-dagafspraken meetellen
+
+## Installeren
+
+Je hebt Android 8.0 of nieuwer nodig.
+
+1. Download de APK op je telefoon via de link hierboven.
+2. Open het bestand en sta installeren toe als Android daarom vraagt.
+3. Open de app en loop de stappen in **Even instellen** door.
+4. Zet op het hoofdscherm **Automatisch stil tijdens afspraken** aan.
+
+**Samsung:** staat Auto Blocker aan, dan wordt de installatie geblokkeerd. Zet het tijdelijk uit via
+Instellingen → Beveiliging en privacy → Auto Blocker, installeer de app en zet het daarna weer aan.
+
+**Batterij:** sommige merken stoppen apps op de achtergrond, waardoor je telefoon te laat stil kan
+worden. Zie de [instructies per merk](docs/onboarding/batterij-optimalisatie.md).
+
+## Privacy
+
+Je agenda blijft op je telefoon. De app heeft geen internettoestemming en verstuurt niets. Lees de
+[privacyverklaring](docs/privacy/privacyverklaring.md).
+
+## Zelf bouwen
+
+Open `android/` in Android Studio, of bouw vanuit die map:
 
 ```
-android/                         Native Android app (Kotlin) — phase 1
-  gradle/                        Version catalog (libs.versions.toml) / wrapper
-  app/src/main/java/app/stillemodus/
-    calendar/                    Reads calendars and events via CalendarContract
-    scheduling/                  SilencePlanner (filters and silence windows), AlarmManager exact
-                                 alarms, AlarmReceiver, BootReceiver (reboot, clock changes),
-                                 CalendarChangeJobService (re-plans when the calendar changes)
-    sound/                       Silences via the interruption filter (alarms only); ringer mode
-                                 changes are ignored for background apps on recent Android
-    settings/                    Per-calendar rules and app state (SharedPreferences, readable
-                                 synchronously from receivers)
-    ui/onboarding/               Permission steps: READ_CALENDAR, DND access, exact alarms,
-                                 battery optimisation
-    ui/settings/                 Per-calendar settings: colors, keywords, margin, all-day events
-  app/src/main/res/              Resources (layouts, strings nl/en, theme light/dark, icon)
-  app/src/test/                  Unit tests (filters, planning, silence rules)
-  app/src/androidTest/           Instrumented tests on device
-ios/                             Phase 2 — placeholder (Shortcuts/Focus approach, see kickoff)
-docs/
-  onboarding/                    Per-manufacturer battery optimisation instructions
-  privacy/                       Privacy policy (needed for Play Store publication)
-Stille Modus Agenda App/         Project notes (kickoff, MOC)
+./gradlew assembleDebug
 ```
 
-## Release build
+Gradle draait op JDK 21 (`android/gradle/gradle-daemon-jvm.properties`), omdat lint in AGP 8.7 niet
+werkt op nieuwere JDK's.
 
-Gradle runs on JDK 21 (`android/gradle/gradle-daemon-jvm.properties`); lint in AGP 8.7 fails on
-newer JDKs. To sign a release, create `android/keystore.properties` (kept out of git):
+Voor een ondertekende release maak je `android/keystore.properties` aan (staat niet in git):
 
 ```
 storeFile=path/to/release.jks
@@ -40,4 +62,28 @@ keyAlias=...
 keyPassword=...
 ```
 
-Then run `./gradlew assembleRelease` or `bundleRelease` from `android/`.
+Daarna bouw je met `./gradlew assembleRelease` of `./gradlew bundleRelease`.
+
+## Projectstructuur
+
+```
+android/                         Android-app (Kotlin), fase 1
+  app/src/main/java/app/stillemodus/
+    calendar/                    Leest agenda's en afspraken via CalendarContract
+    scheduling/                  SilencePlanner (filters en stille periodes), exacte alarmen,
+                                 BootReceiver (herstart, klokwijzigingen),
+                                 CalendarChangeJobService (plant opnieuw bij agendawijzigingen)
+    sound/                       Stil zetten via de interruption filter (alleen alarmen);
+                                 ringer-wijzigingen worden op recente Android-versies genegeerd
+                                 voor apps op de achtergrond
+    settings/                    Regels per agenda en app-status (SharedPreferences)
+    ui/onboarding/               Stappen voor de toestemmingen
+    ui/settings/                 Instellingen per agenda
+  app/src/main/res/              Layouts, teksten (nl/en), thema (licht/donker), icoon
+  app/src/test/                  Unit tests (filters, planning, stilte-regels)
+  app/src/androidTest/           Tests op een apparaat
+ios/                             Fase 2, nog niet gestart (Shortcuts/Focus-aanpak)
+docs/
+  onboarding/                    Batterij-instructies per merk
+  privacy/                       Privacyverklaring
+```
