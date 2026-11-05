@@ -8,6 +8,7 @@ import app.stillemodus.PermissionCheck
 import app.stillemodus.calendar.CalendarRepository
 import app.stillemodus.settings.AutoSilencePreferences
 import app.stillemodus.settings.CalendarRule
+import app.stillemodus.sound.SilenceNotification
 import app.stillemodus.sound.SoundController
 
 object CalendarSilenceScheduler {
@@ -46,7 +47,12 @@ object CalendarSilenceScheduler {
             rules.getOrPut(calendarId) { AutoSilencePreferences.rule(context, calendarId) }
         }
 
-        SoundController(context).applySilence(SilencePlanner.isSilentAt(windows, now))
+        val soundController = SoundController(context)
+        soundController.applySilence(SilencePlanner.isSilentAt(windows, now))
+        SilenceNotification.update(
+            context,
+            SilencePlanner.silentUntil(windows, now).takeIf { soundController.isSilencedNow() }
+        )
 
         val nextBoundary = SilencePlanner.nextBoundaryAfter(windows, now)
         scheduleAt(context, nextBoundary ?: (now + FALLBACK_INTERVAL_MILLIS))
@@ -57,6 +63,7 @@ object CalendarSilenceScheduler {
         cancelAlarm(context)
         CalendarChangeJobService.cancel(context)
         SoundController(context).applySilence(false)
+        SilenceNotification.update(context, null)
     }
 
     private fun scheduleAt(context: Context, timeMillis: Long) {

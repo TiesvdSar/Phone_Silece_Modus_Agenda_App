@@ -35,7 +35,7 @@ class OnboardingActivity : Activity() {
                     R.string.step_calendar_title,
                     R.string.step_calendar_description,
                     { PermissionCheck.hasCalendar(this@OnboardingActivity) },
-                    { requestPermissions(arrayOf(Manifest.permission.READ_CALENDAR), REQUEST_READ_CALENDAR) }
+                    { requestPermissions(arrayOf(Manifest.permission.READ_CALENDAR), REQUEST_PERMISSION) }
                 )
             )
             add(
@@ -55,6 +55,21 @@ class OnboardingActivity : Activity() {
                         {
                             startActivity(
                                 Intent(Settings.ACTION_REQUEST_SCHEDULE_EXACT_ALARM, packageUri())
+                            )
+                        }
+                    )
+                )
+            }
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                add(
+                    Step(
+                        R.string.step_notifications_title,
+                        R.string.step_notifications_description,
+                        { PermissionCheck.canNotify(this@OnboardingActivity) },
+                        {
+                            requestPermissions(
+                                arrayOf(Manifest.permission.POST_NOTIFICATIONS),
+                                REQUEST_PERMISSION
                             )
                         }
                     )
@@ -109,10 +124,11 @@ class OnboardingActivity : Activity() {
         grantResults: IntArray
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (requestCode != REQUEST_READ_CALENDAR) return
+        if (requestCode != REQUEST_PERMISSION) return
+        val permission = permissions.firstOrNull() ?: return
 
         val denied = grantResults.firstOrNull() == PackageManager.PERMISSION_DENIED
-        if (denied && !shouldShowRequestPermissionRationale(Manifest.permission.READ_CALENDAR)) {
+        if (denied && !shouldShowRequestPermissionRationale(permission)) {
             // Android no longer shows the dialog after repeated denials.
             startActivity(Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, packageUri()))
         }
@@ -122,6 +138,6 @@ class OnboardingActivity : Activity() {
     private fun packageUri(): Uri = Uri.parse("package:$packageName")
 
     private companion object {
-        const val REQUEST_READ_CALENDAR = 1
+        const val REQUEST_PERMISSION = 1
     }
 }

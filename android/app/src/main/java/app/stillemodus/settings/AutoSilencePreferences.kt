@@ -45,7 +45,8 @@ object AutoSilencePreferences {
             excludeKeywords = rule.getJSONArray("excludeKeywords").toList { getString(it) },
             marginMinutes = rule.getInt("marginMinutes"),
             marginAfterMinutes = rule.optInt("marginAfterMinutes", 0),
-            includeAllDay = rule.getBoolean("includeAllDay")
+            includeAllDay = rule.getBoolean("includeAllDay"),
+            includeInvited = rule.optBoolean("includeInvited", false)
         )
     }
 
@@ -57,6 +58,7 @@ object AutoSilencePreferences {
             .put("marginMinutes", rule.marginMinutes)
             .put("marginAfterMinutes", rule.marginAfterMinutes)
             .put("includeAllDay", rule.includeAllDay)
+            .put("includeInvited", rule.includeInvited)
         prefs(context).edit().putString(KEY_RULE_PREFIX + calendarId, json.toString()).apply()
     }
 

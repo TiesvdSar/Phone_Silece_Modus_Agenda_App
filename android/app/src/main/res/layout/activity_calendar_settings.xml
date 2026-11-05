@@ -169,5 +169,31 @@
                 android:minHeight="48dp"
                 android:text="@string/all_day_label" />
         </LinearLayout>
+
+        <LinearLayout
+            style="@style/Card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/SectionTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/invited_title" />
+
+            <Switch
+                android:id="@+id/invitedSwitch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="48dp"
+                android:text="@string/invited_label" />
+
+            <TextView
+                style="@style/Hint"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/invited_hint" />
+        </LinearLayout>
     </LinearLayout>
 </ScrollView>

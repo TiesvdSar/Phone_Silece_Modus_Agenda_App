@@ -21,6 +21,14 @@ class SoundController(private val context: Context) {
 
     fun isSilencedByApp(): Boolean = AutoSilencePreferences.isSilenceActive(context)
 
+    fun isSilencedNow(): Boolean = isSilencedByApp() && isDndOn()
+
+    /** Stays marked as active, which makes the rest of this silent period count as a user override. */
+    fun turnSoundOn() {
+        if (!PermissionCheck.hasDndAccess(context)) return
+        notificationManager.setInterruptionFilter(NotificationManager.INTERRUPTION_FILTER_ALL)
+    }
+
     /**
      * Uses the interruption filter rather than AudioManager.setRingerMode: recent Android versions
      * silently ignore ringer changes from background apps, and this always runs in the background.

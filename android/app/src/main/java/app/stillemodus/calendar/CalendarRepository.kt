@@ -24,7 +24,8 @@ data class CalendarEvent(
     val color: Int = 0,
     val canceled: Boolean = false,
     val declined: Boolean = false,
-    val free: Boolean = false
+    val free: Boolean = false,
+    val invited: Boolean = false
 )
 
 class CalendarRepository(private val context: Context) {
@@ -89,7 +90,8 @@ class CalendarRepository(private val context: Context) {
                         color = cursor.getInt(6),
                         canceled = cursor.getInt(7) == CalendarContract.Events.STATUS_CANCELED,
                         declined = cursor.getInt(8) == CalendarContract.Attendees.ATTENDEE_STATUS_DECLINED,
-                        free = cursor.getInt(9) == CalendarContract.Events.AVAILABILITY_FREE
+                        free = cursor.getInt(9) == CalendarContract.Events.AVAILABILITY_FREE,
+                        invited = cursor.getInt(8) == CalendarContract.Attendees.ATTENDEE_STATUS_INVITED
                     )
                 )
             }

@@ -15,7 +15,8 @@ Stille Modus Agenda zet je telefoon automatisch op stil tijdens afspraken in je 
 ## Wat gebeurt er met die gegevens?
 
 Alles blijft op je telefoon. De app heeft geen internettoestemming, verstuurt niets, gebruikt geen
-advertenties of analysediensten en deelt niets met derden. De app past je agenda niet aan.
+advertenties of analysediensten en deelt niets met derden. Je instellingen gaan niet mee in de
+Android-backup. De app past je agenda niet aan.
 
 ## Toestemmingen
 
@@ -25,6 +26,7 @@ advertenties of analysediensten en deelt niets met derden. De app past je agenda
 | Toegang tot Niet storen | Je telefoon op stil zetten en het geluid terugzetten |
 | Exacte alarmen | Op het juiste moment stil zetten en terugzetten |
 | Starten na opnieuw opstarten | De planning herstellen na een herstart |
+| Meldingen | Laten zien dat je telefoon stil staat, met een knop om het geluid aan te zetten |
 
 ## Je gegevens verwijderen
 

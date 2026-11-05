@@ -43,4 +43,14 @@
     <string name="margin_after_label">Minuten na afloop nog stil (0–120)</string>
     <string name="all_day_title">Hele dag</string>
     <string name="all_day_label">Hele-dagafspraken meenemen</string>
+    <string name="invited_title">Uitnodigingen</string>
+    <string name="invited_label">Onbeantwoorde uitnodigingen meenemen</string>
+    <string name="invited_hint">Staat dit uit, dan kan niemand je telefoon stil zetten met een uitnodiging die jij nog niet hebt geaccepteerd.</string>
+
+    <string name="step_notifications_title">Meldingen</string>
+    <string name="step_notifications_description">Laat zien wanneer je telefoon stil staat, met een knop om het geluid direct weer aan te zetten.</string>
+    <string name="notification_channel">Stille modus</string>
+    <string name="notification_title">Telefoon staat op stil</string>
+    <string name="notification_text">Stil tot %1$s</string>
+    <string name="notification_sound_on">Geluid aan</string>
 </resources>

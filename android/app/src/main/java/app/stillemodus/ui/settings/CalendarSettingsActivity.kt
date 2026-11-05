@@ -29,6 +29,7 @@ class CalendarSettingsActivity : Activity() {
     private lateinit var margin: EditText
     private lateinit var marginAfter: EditText
     private lateinit var allDaySwitch: Switch
+    private lateinit var invitedSwitch: Switch
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,6 +53,7 @@ class CalendarSettingsActivity : Activity() {
         margin = findViewById(R.id.marginMinutes)
         marginAfter = findViewById(R.id.marginAfterMinutes)
         allDaySwitch = findViewById(R.id.allDaySwitch)
+        invitedSwitch = findViewById(R.id.invitedSwitch)
 
         val rule = AutoSilencePreferences.rule(this, calendar.id)
         excludedColors.addAll(rule.excludedColors)
@@ -63,6 +65,7 @@ class CalendarSettingsActivity : Activity() {
         margin.setText(rule.marginMinutes.toString())
         marginAfter.setText(rule.marginAfterMinutes.toString())
         allDaySwitch.isChecked = rule.includeAllDay
+        invitedSwitch.isChecked = rule.includeInvited
 
         showColors(calendar, repository.colorsFor(calendar, System.currentTimeMillis()))
     }
@@ -101,7 +104,8 @@ class CalendarSettingsActivity : Activity() {
             excludeKeywords = CalendarRule.parseKeywords(excludeKeywords.text.toString()),
             marginMinutes = minutesIn(margin),
             marginAfterMinutes = minutesIn(marginAfter),
-            includeAllDay = allDaySwitch.isChecked
+            includeAllDay = allDaySwitch.isChecked,
+            includeInvited = invitedSwitch.isChecked
         )
         AutoSilencePreferences.setRule(this, calendarId, rule)
         CalendarSilenceScheduler.checkAndReschedule(this)
