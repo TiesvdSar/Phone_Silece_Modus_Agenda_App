@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Stille Modus Agenda</string>
+
+    <string name="status_silenced_by_app">Stil door je agenda</string>
+    <string name="status_dnd">Niet storen staat aan</string>
+    <string name="status_silent">Telefoon staat op stil</string>
+    <string name="status_vibrate">Telefoon staat op trillen</string>
+    <string name="status_normal">Telefoon staat op normaal</string>
+    <string name="auto_silence_label">Automatisch stil tijdens afspraken</string>
+    <string name="warning_required">De app mist toestemming en kan je telefoon nu niet stil zetten.</string>
+    <string name="warning_optional">Rond de instellingen af, anders kan stil zetten te laat gebeuren.</string>
+    <string name="open_onboarding">Toestemmingen instellen</string>
+    <string name="calendars_title">Agenda\'s</string>
+    <string name="calendars_empty">Geen agenda\'s gevonden. Geef toegang tot je agenda of voeg een agenda toe.</string>
+
+    <string name="onboarding_title">Even instellen</string>
+    <string name="onboarding_intro">De app heeft een paar toestemmingen nodig. Je agenda blijft op je telefoon.</string>
+    <string name="onboarding_done">Klaar</string>
+    <string name="step_grant">Instellen</string>
+    <string name="step_granted">✓ Geregeld</string>
+    <string name="step_calendar_title">Agenda lezen</string>
+    <string name="step_calendar_description">Nodig om te zien wanneer je een afspraak hebt.</string>
+    <string name="step_dnd_title">Geluid regelen</string>
+    <string name="step_dnd_description">Nodig om je telefoon op stil te zetten. Zet de app aan in de lijst \"Niet storen\".</string>
+    <string name="step_exact_title">Exacte alarmen</string>
+    <string name="step_exact_description">Zorgt dat je telefoon precies op tijd stil wordt en weer geluid krijgt.</string>
+    <string name="step_battery_title">Batterij-optimalisatie</string>
+    <string name="step_battery_description">Zet dit uit voor deze app, zodat Android de app niet stopt. Kies \"Alle apps\" en zoek de app op.</string>
+
+    <string name="colors_title">Kleuren</string>
+    <string name="colors_hint">Alleen afspraken in een ingeschakelde kleur maken je telefoon stil.</string>
+    <string name="color_calendar">Agendakleur</string>
+    <string name="color_numbered">Kleur %1$d</string>
+    <string name="keywords_title">Trefwoorden</string>
+    <string name="include_keywords_label">Alleen afspraken met</string>
+    <string name="include_keywords_hint">bijv. vergadering, les</string>
+    <string name="exclude_keywords_label">Nooit afspraken met</string>
+    <string name="exclude_keywords_hint">bijv. lunch, privé</string>
+    <string name="keywords_hint">Scheid trefwoorden met een komma. Leeg laten betekent alle afspraken. \"Nooit\" gaat voor.</string>
+    <string name="margin_title">Marge</string>
+    <string name="margin_label">Minuten voor de start al stil (0–120)</string>
+    <string name="margin_after_label">Minuten na afloop nog stil (0–120)</string>
+    <string name="all_day_title">Hele dag</string>
+    <string name="all_day_label">Hele-dagafspraken meenemen</string>
+</resources>
